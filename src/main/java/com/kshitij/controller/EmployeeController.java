@@ -43,5 +43,11 @@ public class EmployeeController {
 		
 		return "Insertion successful";
 	}
+	@GetMapping("employee/{id}")
+	public Optional<Employee> getEmployeeId(@PathVariable Integer id)
+	{
+		Optional<Employee> e=employeeService.findEmpById(id);
+		return e;
+	}
 	
 }

@@ -32,6 +32,12 @@ public class EmployeeService {
 		List<Employee> emp=employeeRepository.findAll();
 		return emp;
 	}
+
+	public Optional<Employee> findEmpById(Integer id) {
+		Optional<Employee> emp=employeeRepository.findById(id);
+		return emp;
+		
+	}
 	
 	
 	
