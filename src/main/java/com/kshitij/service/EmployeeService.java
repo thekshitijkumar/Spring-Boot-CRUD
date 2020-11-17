@@ -1,5 +1,8 @@
 package com.kshitij.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.kshitij.model.Employee;
@@ -14,14 +17,6 @@ public class EmployeeService {
 	
 	private final EmployeeRepository employeeRepository;
 
-//	public Employee find(int eId) {
-//		
-//		
-//		
-//		
-//		return null;
-//	}
-
 	public void put(Employee req) {
 		Employee emp=new Employee();
 		emp.setEId(req.getEId());
@@ -31,6 +26,11 @@ public class EmployeeService {
 		
 		employeeRepository.save(emp);
 		
+	}
+
+	public List<Employee> findEmp() {
+		List<Employee> emp=employeeRepository.findAll();
+		return emp;
 	}
 	
 	

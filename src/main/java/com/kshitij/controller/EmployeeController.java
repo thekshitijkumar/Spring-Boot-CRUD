@@ -1,5 +1,8 @@
 package com.kshitij.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,18 +25,20 @@ public class EmployeeController {
 	
 	private final EmployeeService employeeService;
 	
-//	@GetMapping("/employee/{eid}")
-//	public Employee getEmployee(@PathVariable int eId)
-//	{
-//		return employeeService.find(eId);
-//		
-//		
-//	}
+	@GetMapping("/employee")
+	public List<Employee> getEmployee()
+	{
+//		System.out.println(eId);
+		
+		return  employeeService.findEmp();
+		
+		
+	}
 	
 	@PostMapping("/employee")
 	public String putEmployee(@RequestBody Employee emp)
 	{
-		System.out.println(emp.getName());
+//		System.out.println(emp.getName());
 		employeeService.put(emp);
 		
 		return "Insertion successful";
