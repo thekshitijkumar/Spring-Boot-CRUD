@@ -3,6 +3,7 @@ package com.kshitij.controller;
 import java.util.List;
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,36 +19,32 @@ import com.kshitij.service.EmployeeService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 @AllArgsConstructor
+@Slf4j
 public class EmployeeController {
 	
 	
 	private final EmployeeService employeeService;
 	
-	@GetMapping("/employee")
+	@GetMapping("/employees")
 	public List<Employee> getEmployee()
 	{
-//		System.out.println(eId);
-		
-		return  employeeService.findEmp();
-		
-		
+		List<Employee> employeeList = employeeService.findEmp();
+		log.debug("Employee List: {}", employeeList);
+		return employeeList;
 	}
 	
-	@PostMapping("/employee")
+	@PostMapping("/employees")
 	public String putEmployee(@RequestBody Employee emp)
 	{
-//		System.out.println(emp.getName());
 		employeeService.put(emp);
-		
 		return "Insertion successful";
 	}
-	@GetMapping("employee/{id}")
-	public Optional<Employee> getEmployeeId(@PathVariable Integer id)
+	@GetMapping("employees/{id}")
+	public Optional<Employee> getEmployeeById(@PathVariable Integer id)
 	{
-		Optional<Employee> e=employeeService.findEmpById(id);
-		return e;
+		return employeeService.findEmpById(id);
 	}
 	
 }
