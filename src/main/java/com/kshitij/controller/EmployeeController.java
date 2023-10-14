@@ -4,13 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kshitij.model.Employee;
@@ -28,18 +26,17 @@ public class EmployeeController {
 	private final EmployeeService employeeService;
 	
 	@GetMapping("/employees")
-	public List<Employee> getEmployee()
+	public List<Employee> getAllEmployees()
 	{
-		List<Employee> employeeList = employeeService.findEmp();
+		List<Employee> employeeList = employeeService.findAllEmployees();
 		log.debug("Employee List: {}", employeeList);
 		return employeeList;
 	}
 	
 	@PostMapping("/employees")
-	public String putEmployee(@RequestBody Employee emp)
+	public Employee addEmployee(@RequestBody Employee emp)
 	{
-		employeeService.put(emp);
-		return "Insertion successful";
+		return employeeService.addEmployee(emp);
 	}
 	@GetMapping("employees/{id}")
 	public Optional<Employee> getEmployeeById(@PathVariable Integer id)
